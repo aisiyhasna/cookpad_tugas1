@@ -22,9 +22,11 @@ import 'package:flutter_application_1/scaffold.dart';
 import 'package:flutter_application_1/seleksi_widget.dart';
 import 'package:flutter_application_1/praktikum1.dart';
 import 'package:flutter_application_1/praktikum2.dart';
+import 'package:flutter_application_1/praktikum3.dart';
+import 'package:flutter_application_1/kartu.dart';
   
 void main() {
-  runApp(const CookpadCloneApp());
+  runApp(const MyProfileCardPage(Nama: '', Kelas: '',));
 }
 
 class MyApp extends StatelessWidget {

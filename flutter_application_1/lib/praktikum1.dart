@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
 
-class CookpadCloneApp extends StatelessWidget {
-  const CookpadCloneApp({super.key});
+import'package:flutter/material.dart';
+
+void main() => runApp(const CookpadApp());
+
+class CookpadApp extends StatelessWidget {
+  const CookpadApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Cookpad Clone',
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-        scaffoldBackgroundColor: Colors.white,
-      ),
       home: const HomePage(),
     );
   }
@@ -20,257 +18,181 @@ class CookpadCloneApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  // Data makanan untuk pencarian populer
-  final List<Map<String, String>> popularSearches = const [
-    {
-      'title': 'ayam bakar',
-      'color': 'orange',
-      'image': 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400',
-    },
-    {
-      'title': 'bolu pisang kukus',
-      'color': 'pink',
-      'image': 'https://...',
-    },
-    {
-      'title': 'capcay',
-      'color': 'green',
-      'image': 'https://...',
-    },
-    {
-      'title': 'sate ayam',
-      'color': 'brown',
-      'image': 'https://...',
-    },
-    {
-      'title': 'soto ayam',
-      'color': 'yellow',
-      'image': 'https://...',
-    },
+  final foods = const [
+    ['ayam bakar',
+      'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500'],
+    ['bolu pisang kukus takaran sendok',
+      'https://images.unsplash.com/photo-1606313564200-e75d5e30476b?w=500'],
+    ['capcay',
+      'https://images.unsplash.com/photo-1547592180-85f173990554?w=500'],
+    ['bolu pisang',
+      'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500'],
+    ['soto ayam',
+      'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500'],
+    ['brownies kukus',
+      'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=500'],
   ];
-
-  // Menentukan warna berdasarkan data makanan
-  Color _getColor(String name) {
-    switch (name) {
-      case 'pink':
-        return Colors.pink.shade100;
-      case 'green':
-        return Colors.green.shade200;
-      case 'brown':
-        return Colors.brown.shade200;
-      case 'yellow':
-        return Colors.yellow.shade200;
-      case 'darkbrown':
-        return Colors.brown.shade400;
-      default:
-        return Colors.grey.shade300;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-
-        // ListView digunakan agar seluruh halaman bisa di-scroll
-        body: ListView(
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(20),
           children: [
-
-            // ---------- HEADER ----------
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-              child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                children: [
-
-                  // Logo Cookpad
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius:
-                              BorderRadius.circular(30),
-                        ),
-                        child: const Icon(
-                          Icons.restaurant_menu,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-
-                      const SizedBox(width: 8),
-
-                      const Text(
-                        'cookpad',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF7A2E2E),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  // Profile dan notifikasi
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 18,
-                        backgroundColor: Colors.pink,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      const Icon(
-                        Icons.notifications_none,
-                        size: 26,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // ---------- SEARCH BAR ----------
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12),
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.grey.shade300,
+            // HEADER
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 28,
+                  backgroundColor: Colors.orange,
+                  child: const Icon(Icons.restaurant, color: Colors.white),
+                ),
+                const SizedBox(width: 10),
+                const Text(
+                  'cookpad',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff671818),
                   ),
                 ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.grey.shade600,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Ketik bahan-bahan...',
-                          hintStyle: TextStyle(
-                            color: Colors.grey.shade600,
-                            fontSize: 16,
-                          ),
-                          border: InputBorder.none,
-                        ),
-
-                      ),
-                    ),
-                  ],
+                const Spacer(),
+                const CircleAvatar(
+                  backgroundColor: Colors.pink,
+                  child: Icon(Icons.person, color: Colors.white),
                 ),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // ---------- JUDUL ----------
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16),
-              child: const Text(
-                'Pencarian Populer',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+                const SizedBox(width: 15),
+                const Icon(Icons.notifications_none, size: 30),
+              ],
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 25),
 
-            // ---------- GRID MAKANAN ----------
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                shrinkWrap: true,
-
-                // Grid tidak scroll sendiri karena sudah ada ListView
-                physics:
-                    const NeverScrollableScrollPhysics(),
-
-                itemCount: popularSearches.length,
-
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 1.4,
+            // SEARCH
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Ketik bahan-bahan...',
+                prefixIcon: const Icon(Icons.search, size: 30),
+                filled: true,
+                fillColor: Colors.grey.shade100,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(35),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
                 ),
-
-                itemBuilder: (context, index) {
-                  final item = popularSearches[index];
-
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: _getColor(
-                          item['color'] ?? '',
-                        ),
-                      ),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-
-                          // Gradasi agar teks lebih mudah dibaca
-                          Positioned.fill(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    Colors.black.withOpacity(0.55),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // Nama makanan
-                          Positioned(
-                            left: 10,
-                            bottom: 10,
-                            right: 10,
-                            child: Text(
-                              item['title']!,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
               ),
             ),
 
             const SizedBox(height: 20),
+
+            // BANNER
+            Container(
+              height: 220,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: const Color(0xfffff8e8),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'cookpad',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    'ANEKA GORENGAN',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffad7519),
+                    ),
+                  ),
+                  Text(
+                    '10–16 Agt 2026',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 8),
+                  Text('#CookpadApron2026 #AnekaGorengan'),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            // TITLE
+            Row(
+              children: [
+                const Text(
+                  'Pencarian Populer',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  'Diperbarui 04.30',
+                  style: TextStyle(color: Colors.grey.shade600),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 15),
+
+            // GRID
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: foods.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 1.4,
+              ),
+              itemBuilder: (context, i) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        foods[i][1],
+                        fit: BoxFit.cover,
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black.withOpacity(.7),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        left: 12,
+                        bottom: 10,
+                        child: Text(
+                          foods[i][0],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
